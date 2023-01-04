@@ -15,29 +15,39 @@
     <version>beta-0.1</version>
     <packaging>pom</packaging>
 
+    <!-- 常量配置 -->
     <properties>
+        <!-- 项目文件编码 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- JDK版本 -->
         <java.version>17</java.version>
+        <!-- SpringBoot版本 -->
         <spring-boot.version>2.7.7</spring-boot.version>
+        <!-- SpringCloud版本 -->
         <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <!-- SpringCloud Alibaba版本 -->
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
     </properties>
 
+    <!-- 全局依赖，此标签下的依赖会导入到每一个子模块中 -->
     <dependencies>
+        <!-- 微服务健康监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <!-- AOP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <!-- 测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Spring注解处理器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -45,7 +55,9 @@
         </dependency>
     </dependencies>
 
+    <!-- 依赖版本定义，此标签中定义的依赖在子模块中引用则无需显式的声明版本 -->
     <dependencyManagement>
+        <!-- SpringCloud全家桶版本定义 -->
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -54,6 +66,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- SpringCloud Alibaba全家桶版本定义 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>

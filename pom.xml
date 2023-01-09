@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>infrastructure</module>
+        <module>demo</module>
     </modules>
 
     <!-- 常量配置 -->
@@ -33,6 +34,8 @@
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <!-- SpringCloud Alibaba版本 -->
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <!-- Swagger接口文档版本 -->
+        <swagger.version>2.8.0</swagger.version>
     </properties>
 
     <!-- 全局依赖，此标签下的依赖会导入到每一个子模块中 -->
@@ -79,6 +82,17 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- Swagger接口文档 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

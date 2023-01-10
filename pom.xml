@@ -16,7 +16,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>infrastructure</module>
-        <module>demo</module>
     </modules>
 
     <!-- 常量配置 -->

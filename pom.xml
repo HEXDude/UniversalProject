@@ -10,14 +10,6 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.hexdude.myaccount</groupId>
-    <artifactId>MyAccount</artifactId>
-    <version>beta-0.1</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>infrastructure</module>
-    </modules>
-
     <!-- 常量配置 -->
     <properties>
         <!-- 项目文件编码 -->
@@ -27,6 +19,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <!-- JDK版本 -->
         <java.version>17</java.version>
+        <!-- 工程版本 -->
+        <project.version>beta-0.1</project.version>
         <!-- SpringBoot版本 -->
         <spring-boot.version>2.7.7</spring-boot.version>
         <!-- SpringCloud版本 -->
@@ -36,6 +30,14 @@
         <!-- Swagger接口文档版本 -->
         <swagger.version>3.0.0</swagger.version>
     </properties>
+
+    <groupId>com.hexdude.myaccount</groupId>
+    <artifactId>MyAccount</artifactId>
+    <version>${project.version}</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>infrastructure</module>
+    </modules>
 
     <!-- 全局依赖，此标签下的依赖会导入到每一个子模块中 -->
     <dependencies>

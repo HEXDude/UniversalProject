@@ -1,32 +1,23 @@
 package com.hexdude.myaccount.infrastructure.configuration;
 
 import com.hexdude.myaccount.infrastructure.property.OpenApiProperties;
-import org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties;
-import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
-import org.springframework.boot.actuate.autoconfigure.web.server.ManagementPortType;
-import org.springframework.boot.actuate.endpoint.ExposableEndpoint;
-import org.springframework.boot.actuate.endpoint.web.*;
-import org.springframework.boot.actuate.endpoint.web.annotation.ControllerEndpointsSupplier;
-import org.springframework.boot.actuate.endpoint.web.annotation.ServletEndpointsSupplier;
+import io.swagger.annotations.Api;
 import org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.util.StringUtils;
+import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * @author HEXDude
@@ -34,8 +25,8 @@ import java.util.List;
  * @brief OpenAPI配置文件
  */
 @Configuration
+@ConditionalOnBean(value = WebMvcEndpointHandlerMapping.class)
 @ConditionalOnProperty(value = "openapi.enable")
-@EnableOpenApi
 public class OpenApiConfiguration {
 
     /**
@@ -53,7 +44,7 @@ public class OpenApiConfiguration {
     private ApiInfo apiInfo(OpenApiProperties openApiProperties) {
         return new ApiInfo(openApiProperties.getTitle(),
                 openApiProperties().getDescription(),
-                "工程版本：" + openApiProperties().getProjectVersion() + "SpringBoot版本：" + openApiProperties.getSpringBootVersion(),
+                "工程版本：" + openApiProperties().getProjectVersion() + "，SpringBoot版本：" + openApiProperties.getSpringBootVersion(),
                 openApiProperties.getTerms(),
                 new Contact(openApiProperties.getContactName(), openApiProperties.getContactUrl(), openApiProperties.getContactEmailAddress()),
                 openApiProperties.getLicense(),
@@ -65,30 +56,21 @@ public class OpenApiConfiguration {
      * 创建OpenApi在线文档
      */
     @Bean
-    public Docket api(OpenApiProperties openApiProperties) {
+    public Docket api(OpenApiProperties openApiProperties, Environment environment) {
+        System.out.println("Docket初始了");
+        // 配置启用OpenApi的环境
+        Profiles acceptedProfiles = Profiles.of("dev");
+        boolean enableOpenApi = environment.acceptsProfiles(acceptedProfiles);
+
         return new Docket(DocumentationType.OAS_30)
+                .enable(enableOpenApi)
+                // 文档信息
                 .apiInfo(apiInfo(openApiProperties))
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                // 扫描的位置
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                // 指定的节点位置
                 .paths(PathSelectors.any())
                 .build();
-    }
-
-    /* 解决OpenApi与SpringBoot2.6+不兼容的问题 */
-    @Bean
-    public WebMvcEndpointHandlerMapping webEndpointServletHandlerMapping(WebEndpointsSupplier webEndpointsSupplier, ServletEndpointsSupplier servletEndpointsSupplier, ControllerEndpointsSupplier controllerEndpointsSupplier, EndpointMediaTypes endpointMediaTypes, CorsEndpointProperties corsProperties, WebEndpointProperties webEndpointProperties, Environment environment) {
-        List<ExposableEndpoint<?>> allEndpoints = new ArrayList<>();
-        Collection<ExposableWebEndpoint> webEndpoints = webEndpointsSupplier.getEndpoints();
-        allEndpoints.addAll(webEndpoints);
-        allEndpoints.addAll(servletEndpointsSupplier.getEndpoints());
-        allEndpoints.addAll(controllerEndpointsSupplier.getEndpoints());
-        String basePath = webEndpointProperties.getBasePath();
-        EndpointMapping endpointMapping = new EndpointMapping(basePath);
-        boolean shouldRegisterLinksMapping = this.shouldRegisterLinksMapping(webEndpointProperties, environment, basePath);
-        return new WebMvcEndpointHandlerMapping(endpointMapping, webEndpoints, endpointMediaTypes, corsProperties.toCorsConfiguration(), new EndpointLinksResolver(allEndpoints, basePath), shouldRegisterLinksMapping, null);
-    }
-
-    private boolean shouldRegisterLinksMapping(WebEndpointProperties webEndpointProperties, Environment environment, String basePath) {
-        return webEndpointProperties.getDiscovery().isEnabled() && (StringUtils.hasText(basePath) || ManagementPortType.get(environment).equals(ManagementPortType.DIFFERENT));
     }
 }

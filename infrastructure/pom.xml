@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.hexdude.myaccount</groupId>
         <artifactId>MyAccount</artifactId>
-        <version>${project.version}</version>
+        <version>beta-0.1</version>
     </parent>
 
     <artifactId>infrastructure</artifactId>

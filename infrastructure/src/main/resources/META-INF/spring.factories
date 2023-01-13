@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.hexdude.myaccount.infrastructure.patch.OpenApiHotfix,\
+  com.hexdude.myaccount.infrastructure.configuration.OpenApiConfiguration

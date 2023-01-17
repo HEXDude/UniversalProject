@@ -33,10 +33,11 @@
 
     <groupId>com.hexdude.myaccount</groupId>
     <artifactId>MyAccount</artifactId>
-    <version>${project.version}</version>
+    <version>beta-0.1</version>
     <packaging>pom</packaging>
     <modules>
         <module>infrastructure</module>
+        <module>demo</module>
     </modules>
 
     <!-- 全局依赖，此标签下的依赖会导入到每一个子模块中 -->

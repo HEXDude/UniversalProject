@@ -31,13 +31,12 @@
         <swagger.version>3.0.0</swagger.version>
     </properties>
 
-    <groupId>com.hexdude.myaccount</groupId>
-    <artifactId>MyAccount</artifactId>
+    <groupId>com.hexdude</groupId>
+    <artifactId>universal-project</artifactId>
     <version>beta-0.1</version>
     <packaging>pom</packaging>
     <modules>
         <module>infrastructure</module>
-        <module>demo</module>
     </modules>
 
     <!-- 全局依赖，此标签下的依赖会导入到每一个子模块中 -->

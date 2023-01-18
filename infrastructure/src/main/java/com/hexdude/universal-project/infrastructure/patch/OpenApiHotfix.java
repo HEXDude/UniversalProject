@@ -1,6 +1,6 @@
-package com.hexdude.myaccount.infrastructure.patch;
+package com.hexdude.universalproject.infrastructure.patch;
 
-import com.hexdude.myaccount.infrastructure.configuration.OpenApiConfiguration;
+import com.hexdude.universalproject.infrastructure.configuration.OpenApiConfiguration;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.web.server.ManagementPortType;

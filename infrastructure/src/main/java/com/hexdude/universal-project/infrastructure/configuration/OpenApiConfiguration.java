@@ -1,6 +1,6 @@
-package com.hexdude.myaccount.infrastructure.configuration;
+package com.hexdude.universalproject.infrastructure.configuration;
 
-import com.hexdude.myaccount.infrastructure.property.OpenApiProperties;
+import com.hexdude.universalproject.infrastructure.property.OpenApiProperties;
 import io.swagger.annotations.Api;
 import org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

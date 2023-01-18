@@ -1,4 +1,4 @@
-package com.hexdude.myaccount.infrastructure.property;
+package com.hexdude.universalproject.infrastructure.property;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

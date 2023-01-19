@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.hexdude</groupId>
-        <artifactId>UniversalProject</artifactId>
+        <artifactId>universal-project</artifactId>
         <version>beta-0.1</version>
     </parent>
 

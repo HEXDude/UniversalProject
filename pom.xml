@@ -23,22 +23,11 @@
         <project.version>beta-0.1</project.version>
         <!-- SpringBoot版本 -->
         <spring-boot.version>2.7.7</spring-boot.version>
-        <!-- SpringCloud版本 -->
-        <spring-cloud.version>2021.0.5</spring-cloud.version>
-        <!-- SpringCloud Alibaba版本 -->
-        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
-        <!-- Swagger接口文档版本 -->
-        <swagger.version>3.0.0</swagger.version>
     </properties>
 
     <groupId>com.hexdude</groupId>
-    <artifactId>universal-project</artifactId>
-    <version>beta-0.1</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>infrastructure</module>
-        <module>untitled</module>
-    </modules>
+    <artifactId>HEXBudget</artifactId>
+    <version>${project.version}</version>
 
     <!-- 全局依赖，此标签下的依赖会导入到每一个子模块中 -->
     <dependencies>
@@ -70,32 +59,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <!-- 依赖版本定义，此标签中定义的依赖在子模块中引用则无需显式的声明版本 -->
-    <dependencyManagement>
-        <!-- SpringCloud全家桶版本定义 -->
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- SpringCloud Alibaba全家桶版本定义 -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- Swagger接口文档 -->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>
